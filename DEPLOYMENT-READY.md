@@ -113,7 +113,7 @@ NODE_ENV=production
 PORT=5000
 FRONTEND_URL=http://${VM_IP}:3000
 JWT_SECRET=${JWT_SECRET}
-VITE_API_URL=http://${VM_IP}:5000
+VITE_API_URL=http://${VM_IP}:5000/api
 EOF && \
 echo "✅ VM Setup Complete!" && \
 echo "Now logout and login again: exit, then ssh back in" && \

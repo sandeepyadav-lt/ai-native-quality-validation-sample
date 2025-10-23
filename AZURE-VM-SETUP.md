@@ -220,7 +220,7 @@ cd ~/Github-App-Demo
    PORT=5000
    FRONTEND_URL=http://${VM_IP}:3000
    JWT_SECRET=${JWT_SECRET}
-   VITE_API_URL=http://${VM_IP}:5000
+   VITE_API_URL=http://${VM_IP}:5000/api
    EOF
    ```
 
