@@ -220,7 +220,7 @@ cd ~/Github-App-Demo
    PORT=5000
    FRONTEND_URL=http://${VM_IP}:3000
    JWT_SECRET=${JWT_SECRET}
-   VM_HOST=${VM_IP}
+   VITE_API_URL=http://${VM_IP}:5000
    EOF
    ```
 
@@ -235,7 +235,7 @@ cd ~/Github-App-Demo
    PORT=5000
    FRONTEND_URL=http://YOUR_VM_PUBLIC_IP:3000
    JWT_SECRET=YOUR_GENERATED_JWT_SECRET_HERE
-   VM_HOST=YOUR_VM_PUBLIC_IP
+   VITE_API_URL=http://YOUR_VM_PUBLIC_IP:5000
    ```
    
    Replace:
