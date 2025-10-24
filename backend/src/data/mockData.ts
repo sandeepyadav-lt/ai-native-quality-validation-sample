@@ -4,6 +4,19 @@ import bcrypt from 'bcryptjs';
 // Mock Users Data
 export const mockUsers = [
   {
+    _id: '507f1f77bcf86cd799439010',
+    email: 'lambdatestadmin@email.com',
+    password: bcrypt.hashSync('password123', 10),
+    firstName: 'LambdaTest',
+    lastName: 'Admin',
+    avatar: 'https://i.pravatar.cc/150?img=68',
+    phone: '+1-555-0100',
+    bio: 'LambdaTest administrator account for testing and demo purposes.',
+    isHost: true,
+    createdAt: new Date('2018-01-01'),
+    updatedAt: new Date('2024-10-24'),
+  },
+  {
     _id: '507f1f77bcf86cd799439011',
     email: 'sarah.johnson@email.com',
     password: bcrypt.hashSync('password123', 10),

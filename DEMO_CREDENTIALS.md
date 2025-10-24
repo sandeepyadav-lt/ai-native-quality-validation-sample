@@ -16,35 +16,42 @@ password123
 
 ## Demo Users
 
-### 1. Sarah Johnson (Host)
+### 1. LambdaTest Admin (Host)
+- **Email**: `lambdatestadmin@email.com`
+- **Password**: `password123`
+- **Role**: Host/Admin
+- **Bio**: LambdaTest administrator account for testing and demo purposes.
+- **Properties**: Full access to all platform features
+
+### 2. Sarah Johnson (Host)
 - **Email**: `sarah.johnson@email.com`
 - **Password**: `password123`
 - **Role**: Host
 - **Bio**: Travel enthusiast and photography lover. Host since 2019.
 - **Properties**: Owns 5 listings including Malibu villas and Waikiki condos
 
-### 2. Michael Chen (Host)
+### 3. Michael Chen (Host)
 - **Email**: `michael.chen@email.com`
 - **Password**: `password123`
 - **Role**: Host
 - **Bio**: Architect and real estate investor. Passionate about unique spaces.
 - **Properties**: Owns properties in Brooklyn and San Francisco
 
-### 3. Emma Davis (Guest)
+### 4. Emma Davis (Guest)
 - **Email**: `emma.davis@email.com`
 - **Password**: `password123`
 - **Role**: Guest (Not a host)
 - **Bio**: Digital nomad exploring the world one city at a time.
 - **Properties**: None (guest account only)
 
-### 4. James Wilson (Host)
+### 5. James Wilson (Host)
 - **Email**: `james.wilson@email.com`
 - **Password**: `password123`
 - **Role**: Host
 - **Bio**: Experienced host with 50+ properties worldwide.
 - **Properties**: Owns multiple listings in Austin, Miami, and Scottsdale
 
-### 5. Olivia Brown (Guest)
+### 6. Olivia Brown (Guest)
 - **Email**: `olivia.brown@email.com`
 - **Password**: `password123`
 - **Role**: Guest (Not a host)
@@ -55,10 +62,10 @@ password123
 
 ## Quick Test Scenarios
 
-### Scenario 1: Login as Host and View Listings
+### Scenario 1: Login as Admin and View Listings
 1. Go to: http://localhost:5174/login
-2. Use: `sarah.johnson@email.com` / `password123`
-3. Browse listings owned by Sarah
+2. Use: `lambdatestadmin@email.com` / `password123`
+3. Browse all platform features with admin access
 
 ### Scenario 2: Create a New Listing (Become a Host)
 1. Go to: http://localhost:5174/login
@@ -198,7 +205,7 @@ Click "Create Listing" to add your property to the platform!
 - **Backend**: Running on http://localhost:5000/
 - **Mode**: Mock Data (No MongoDB required)
 - **Total Listings**: 28 properties
-- **Total Users**: 5 demo users
+- **Total Users**: 6 demo users
 
 ---
 
