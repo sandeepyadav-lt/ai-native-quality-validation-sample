@@ -193,9 +193,9 @@ jobs:
               body: `### ✅ PR Deployed Successfully! 🚀
               
               **Live Preview URLs:**
-              - 🌐 Frontend: http://${{ secrets.AZURE_VM_HOST }}:3000
-              - 🔧 Backend API: http://${{ secrets.AZURE_VM_HOST }}:5000
-              - 💚 Health Check: http://${{ secrets.AZURE_VM_HOST }}:5000/health
+              - 🌐 Frontend: https://demo.lambdatestinternal.com
+              - 🔧 Backend API: https://demo.lambdatestinternal.com/api
+              - 💚 Health Check: https://demo.lambdatestinternal.com/health
               
               **Deployment Info:**
               - Branch: \`${{ github.head_ref }}\`
