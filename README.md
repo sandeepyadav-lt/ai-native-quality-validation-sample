@@ -78,9 +78,9 @@ Pre-defined category filters:
 ### Mock Data
 
 The application includes 46 diverse properties across the United States:
-- **Locations**: Malibu, Brooklyn, Austin, Aspen, Miami Beach, San Francisco, Honolulu, Scottsdale, Seattle, Boston, Chicago, South Lake Tahoe, New York, San Diego, Nashville, Park City, Charleston, Portland, Las Vegas, New Orleans, Denver, Los Angeles, Philadelphia, Savannah, Santa Fe, Napa Valley
+- **Locations**: Nashville, Napa Valley, Austin, Seattle, Charleston, Los Angeles, Boston, Honolulu, Santa Fe, Portland, Malibu, Park City, Denver, Philadelphia, San Diego, Brooklyn, Las Vegas, Miami Beach, Chicago, Aspen, New Orleans, Scottsdale, South Lake Tahoe, New York, Savannah, San Francisco
 - **Price range**: $120 - $2200 per night
-- **Property types**: Villa, Apartment, Cabin, House, Loft, Condo, Penthouse
+- **Property types**: Penthouse, House, Loft, Villa, Condo, Cabin, Apartment
 - **New locations**:
   - Philadelphia, PA - Historic colonial townhouse
   - Savannah, GA - Victorian mansion with Southern charm
