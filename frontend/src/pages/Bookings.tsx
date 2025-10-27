@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuthStore } from '../store/authStore';
-import { FaCalendarAlt, FaMapMarkerAlt, FaUsers, FaCheckCircle, FaClock, FaBan, FaTimesCircle } from 'react-icons/fa';
+import { FaCalendarAlt, FaMapMarkerAlt, FaUsers, FaCheckCircle, FaClock, FaBan } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 // Mock bookings data - In a real app, this would come from an API
