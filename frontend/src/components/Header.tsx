@@ -33,6 +33,12 @@ const Header = () => {
           {/* User Menu */}
           <div className="flex items-center space-x-4">
             <Link
+              to="/"
+              className="hidden md:block text-sm font-semibold text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-full"
+            >
+              Explore
+            </Link>
+            <Link
               to="/become-host"
               className="hidden md:block text-sm font-semibold text-gray-700 hover:bg-gray-100 px-4 py-2 rounded-full"
             >

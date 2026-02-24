@@ -110,6 +110,27 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Quick Destinations */}
+      {activeCategory === 'All' && !searchFilters.city && (
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Popular destinations</h2>
+          <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide">
+            {['Malibu', 'Austin', 'Miami Beach', 'Honolulu', 'San Francisco', 'Aspen'].map((city) => (
+              <button
+                key={city}
+                onClick={() => {
+                  setSearchFilters({ city });
+                  setCurrentPage(1);
+                }}
+                className="flex-shrink-0 px-5 py-2.5 bg-white border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition"
+              >
+                {city}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Listings Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Search Summary */}

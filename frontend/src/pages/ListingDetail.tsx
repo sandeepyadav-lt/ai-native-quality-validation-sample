@@ -110,6 +110,11 @@ const ListingDetail = () => {
               </span>
             </div>
           )}
+          {listing.rating && listing.rating >= 4.8 && (
+            <span className="inline-flex items-center text-xs font-semibold text-white bg-airbnb-red px-2.5 py-0.5 rounded-full">
+              Superhost
+            </span>
+          )}
           <div className="flex items-center text-gray-600">
             <FaMapMarkerAlt className="mr-1" />
             {listing.location.city}, {listing.location.state},{' '}
@@ -184,13 +189,14 @@ const ListingDetail = () => {
               {listing.amenities.map((amenity, index) => {
                 const Icon = amenityIcons[amenity] || FaWifi;
                 return (
-                  <div key={index} className="flex items-center space-x-3">
+                  <div key={index} className="flex items-center space-x-3 p-2 rounded-lg hover:bg-gray-50 transition">
                     <Icon className="text-gray-600" />
                     <span>{amenity}</span>
                   </div>
                 );
               })}
             </div>
+            <p className="mt-4 text-sm text-gray-500">{listing.amenities.length} amenities available</p>
           </div>
 
           {/* Reviews */}
@@ -299,6 +305,8 @@ const ListingDetail = () => {
             >
               {bookingMutation.isPending ? 'Booking...' : 'Reserve'}
             </button>
+
+            <p className="text-center text-xs text-gray-500 mt-2">You won't be charged yet</p>
 
             {nights > 0 && (
               <div className="mt-6 space-y-2">
