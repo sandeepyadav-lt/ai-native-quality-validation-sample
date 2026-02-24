@@ -88,6 +88,20 @@ The application includes 46 diverse properties across the United States:
   - Napa Valley, CA - Luxury wine country estate
 - All properties feature unique images, detailed descriptions, and authentic amenities
 
+## 🔧 Setup for KaneAI GitHub App Integration
+
+To use this repository with the [LambdaTest Cloud GitHub App](https://github.com/apps/lambdatest-ai-cloud), follow these steps:
+
+1. **Fork the repository** — Click **Fork** to create a copy under your GitHub account.
+2. **Install the GitHub App** — Install the [LambdaTest Cloud GitHub App](https://github.com/apps/lambdatest-ai-cloud) on your forked repository.
+3. **Configure credentials** — Add the `.lambdatest/config.yaml` file with your LambdaTest project ID, folder ID, and other configuration values. See the [configuration guide](https://www.lambdatest.com/support/docs/kaneai-github-app/#repository-configuration) for details.
+4. **Enable GitHub Actions** — Go to the **Actions** tab in your forked repository and enable workflows.
+5. **Enable GitHub Pages** — Go to **Settings → Pages** and set the source to **GitHub Actions**.
+6. **Trigger the workflow** — Open a pull request and comment `@KaneAI Validate this PR`.
+
+For detailed documentation, visit the [LambdaTest Cloud GitHub App Integration Guide](https://www.lambdatest.com/support/docs/kaneai-github-app/).
+
+
 
 
 
