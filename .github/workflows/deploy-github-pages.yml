@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, reopened, closed]
   workflow_dispatch:
 
@@ -16,9 +16,45 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  authorize:
+    name: Authorize
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    outputs:
+      allowed: ${{ steps.check.outputs.allowed }}
+    steps:
+      - name: Check PR author
+        id: check
+        run: |
+          # Non-PR events (push, workflow_dispatch) are always allowed
+          if [ "${{ github.event_name }}" != "pull_request_target" ]; then
+            echo "allowed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # On forks, allow all PR authors
+          if [ "${{ github.repository_owner }}" != "LambdaTest" ]; then
+            echo "allowed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # On upstream, check against allowed list
+          AUTHOR="${{ github.event.pull_request.user.login }}"
+          ALLOWED="${{ vars.ALLOWED_PR_AUTHORS }}"
+          IFS=',' read -ra USERS <<< "$ALLOWED"
+          for user in "${USERS[@]}"; do
+            user="$(echo "$user" | xargs)"
+            if [ "$user" = "$AUTHOR" ]; then
+              echo "allowed=true" >> "$GITHUB_OUTPUT"
+              echo "Author '$AUTHOR' is allowed"
+              exit 0
+            fi
+          done
+          echo "allowed=false" >> "$GITHUB_OUTPUT"
+          echo "Author '$AUTHOR' is not in the allowed list"
+
   build:
     name: Build
-    if: github.event.action != 'closed'
+    needs: authorize
+    if: needs.authorize.outputs.allowed == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -41,7 +77,7 @@ jobs:
         id: base
         run: |
           REPO_NAME="${{ github.event.repository.name }}"
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
+          if [ "${{ github.event_name }}" = "pull_request_target" ]; then
             echo "url=/${REPO_NAME}/pr-${{ github.event.pull_request.number }}/" >> "$GITHUB_OUTPUT"
           else
             echo "url=/${REPO_NAME}/" >> "$GITHUB_OUTPUT"
@@ -63,8 +99,8 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: build
-    if: github.event.action != 'closed'
+    needs: [authorize, build]
+    if: always() && needs.build.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout gh-pages branch
@@ -96,7 +132,7 @@ jobs:
       - name: Determine target directory
         id: target
         run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
+          if [ "${{ github.event_name }}" = "pull_request_target" ]; then
             echo "dir=pr-${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT"
           else
             echo "dir=." >> "$GITHUB_OUTPUT"
@@ -123,12 +159,12 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to deploy"
           else
-            git commit -m "Deploy ${{ github.event_name == 'pull_request' && format('PR #{0}', github.event.pull_request.number) || 'main' }} — ${{ github.sha }}"
+            git commit -m "Deploy ${{ github.event_name == 'pull_request_target' && format('PR #{0}', github.event.pull_request.number) || 'main' }} — ${{ github.event.pull_request.head.sha || github.sha }}"
             git push origin gh-pages
           fi
 
       - name: Comment PR with preview URL
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request_target'
         continue-on-error: true
         uses: actions/github-script@v7
         with:
@@ -154,7 +190,7 @@ jobs:
             const marker = '<!-- gh-pages-preview -->';
             const existing = comments.find(c => c.body.includes(marker));
 
-            const body = `${marker}\n### GitHub Pages Preview\n\n| | |\n|---|---|\n| **URL** | ${url} |\n| **Commit** | \`${context.sha.slice(0, 7)}\` |\n| **Branch** | \`${context.payload.pull_request.head.ref}\` |\n\nThis preview updates automatically on each push.`;
+            const body = `${marker}\n### GitHub Pages Preview\n\n| | |\n|---|---|\n| **URL** | ${url} |\n| **Commit** | \`${context.payload.pull_request.head.sha.slice(0, 7)}\` |\n| **Branch** | \`${context.payload.pull_request.head.ref}\` |\n\nThis preview updates automatically on each push.`;
 
             if (existing) {
               await github.rest.issues.updateComment({
@@ -168,7 +204,7 @@ jobs:
 
   cleanup:
     name: Cleanup PR preview
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    if: github.event_name == 'pull_request_target' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout gh-pages branch
