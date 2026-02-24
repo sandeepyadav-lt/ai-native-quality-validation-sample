@@ -84,6 +84,19 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Promotional Banner */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="bg-gradient-to-r from-rose-500 to-pink-600 rounded-2xl p-6 text-white flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-bold">New Year, New Adventures</h3>
+            <p className="text-sm text-white/90 mt-1">Get 15% off your first booking. Use code WELCOME15 at checkout.</p>
+          </div>
+          <button className="bg-white text-rose-600 font-semibold text-sm px-5 py-2 rounded-full hover:bg-gray-100 transition whitespace-nowrap ml-4">
+            Learn More
+          </button>
+        </div>
+      </div>
+
       {/* Categories - Center Aligned */}
       <div className="border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

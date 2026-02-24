@@ -51,6 +51,13 @@ const ListingCard = ({ listing }: ListingCardProps) => {
           }}
         />
 
+        {/* Top Rated Badge */}
+        {listing.rating && listing.rating >= 4.9 && (
+          <span className="absolute top-3 left-3 bg-yellow-400 text-yellow-900 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm">
+            Top Rated
+          </span>
+        )}
+
         {/* Favorite Button */}
         <button
           onClick={handleFavoriteClick}
