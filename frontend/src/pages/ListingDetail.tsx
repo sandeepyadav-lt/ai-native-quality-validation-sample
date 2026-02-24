@@ -13,6 +13,9 @@ import {
   FaParking,
   FaTv,
   FaSnowflake,
+  FaShareAlt,
+  FaRegHeart,
+  FaShieldAlt,
 } from 'react-icons/fa';
 import { listingService } from '../services/listingService';
 import { bookingService } from '../services/bookingService';
@@ -100,20 +103,32 @@ const ListingDetail = () => {
         <h1 className="text-3xl font-semibold text-gray-900 mb-2">
           {listing.title}
         </h1>
-        <div className="flex items-center space-x-4 text-sm">
-          {listing.rating && (
-            <div className="flex items-center">
-              <FaStar className="text-black mr-1" />
-              <span className="font-semibold">{listing.rating}</span>
-              <span className="text-gray-600 ml-1">
-                ({listing.reviewCount} reviews)
-              </span>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4 text-sm">
+            {listing.rating && (
+              <div className="flex items-center">
+                <FaStar className="text-black mr-1" />
+                <span className="font-semibold">{listing.rating}</span>
+                <span className="text-gray-600 ml-1">
+                  ({listing.reviewCount} reviews)
+                </span>
+              </div>
+            )}
+            <div className="flex items-center text-gray-600">
+              <FaMapMarkerAlt className="mr-1" />
+              {listing.location.city}, {listing.location.state},{' '}
+              {listing.location.country}
             </div>
-          )}
-          <div className="flex items-center text-gray-600">
-            <FaMapMarkerAlt className="mr-1" />
-            {listing.location.city}, {listing.location.state},{' '}
-            {listing.location.country}
+          </div>
+          <div className="flex items-center space-x-3">
+            <button className="flex items-center space-x-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
+              <FaShareAlt />
+              <span>Share</span>
+            </button>
+            <button className="flex items-center space-x-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 px-3 py-2 rounded-lg transition">
+              <FaRegHeart />
+              <span>Save</span>
+            </button>
           </div>
         </div>
       </div>
@@ -190,6 +205,20 @@ const ListingDetail = () => {
                   </div>
                 );
               })}
+            </div>
+          </div>
+
+          {/* Cancellation Policy */}
+          <div className="pb-8 border-b border-gray-200">
+            <h3 className="text-xl font-semibold mb-4">Cancellation policy</h3>
+            <div className="flex items-start space-x-4">
+              <FaShieldAlt className="text-green-600 text-xl mt-1 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-gray-900">Free cancellation within 48 hours</p>
+                <p className="text-gray-600 text-sm mt-1">
+                  Cancel before check-in for a partial refund. After that, the first night is non-refundable.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -295,10 +324,11 @@ const ListingDetail = () => {
             <button
               onClick={handleBooking}
               disabled={bookingMutation.isPending || !checkIn || !checkOut}
-              className="w-full bg-airbnb-red text-white font-semibold py-3 rounded-lg hover:bg-red-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-gradient-to-r from-airbnb-red to-pink-600 text-white font-semibold py-3 rounded-lg hover:from-red-600 hover:to-pink-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {bookingMutation.isPending ? 'Booking...' : 'Reserve'}
             </button>
+            <p className="text-center text-sm text-gray-500 mt-2">You won't be charged yet</p>
 
             {nights > 0 && (
               <div className="mt-6 space-y-2">
