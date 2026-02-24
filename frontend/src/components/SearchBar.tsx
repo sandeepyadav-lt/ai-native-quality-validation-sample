@@ -44,6 +44,7 @@ const SearchBar = ({ onSearch, initialFilters }: SearchBarProps) => {
   const [activeField, setActiveField] = useState<string | null>(null);
 
   const locationRef = useRef<HTMLDivElement>(null);
+  const locationInputRef = useRef<HTMLInputElement>(null);
   const dateRef = useRef<HTMLDivElement>(null);
   const guestRef = useRef<HTMLDivElement>(null);
 
@@ -135,12 +136,15 @@ const SearchBar = ({ onSearch, initialFilters }: SearchBarProps) => {
                 setShowLocationDropdown(true);
                 setShowDatePicker(false);
                 setShowGuestPicker(false);
+                locationInputRef.current?.focus();
               }}
             >
-              <label className="block text-xs font-semibold text-gray-900 mb-1">
+              <label htmlFor="search-location" className="block text-xs font-semibold text-gray-900 mb-1">
                 Where
               </label>
               <input
+                ref={locationInputRef}
+                id="search-location"
                 type="text"
                 placeholder="Search destinations"
                 value={location}
