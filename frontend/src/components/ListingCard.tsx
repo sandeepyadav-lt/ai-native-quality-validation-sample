@@ -51,6 +51,13 @@ const ListingCard = ({ listing }: ListingCardProps) => {
           }}
         />
 
+        {/* Guest Favorite Badge */}
+        {listing.reviewCount && listing.reviewCount >= 50 && (
+          <span className="absolute top-3 left-3 bg-white text-xs font-bold px-2.5 py-1 rounded-full shadow-md border border-gray-100">
+            Guest favorite
+          </span>
+        )}
+
         {/* Favorite Button */}
         <button
           onClick={handleFavoriteClick}
